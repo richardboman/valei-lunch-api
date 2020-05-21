@@ -4,13 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using ValeiLunchAPI.Restaurants.Models;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using Newtonsoft.Json;
 
 namespace ValeiLunchAPI.Lunches.Models
 {
     public class Lunch
     {
         public int LunchId { get; set; }
+        [JsonProperty("rating")]
         public int Rating { get; set; }
+        [JsonProperty("comment")]
         public string Comment { get; set; }
 
         public int RestaurantId { get; set; }

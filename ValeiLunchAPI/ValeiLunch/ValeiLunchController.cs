@@ -12,12 +12,12 @@ using ValeiLunchAPI.Restaurants.Models;
 namespace ValeiLunchAPI.Lunches
 {
     [Route("api/[controller]")]
-    public class LunchController : Controller
+    public class ValeiLunchController : Controller
 
     {
         private readonly LunchDbContext _context;
 
-        public LunchController(LunchDbContext context)
+        public ValeiLunchController(LunchDbContext context)
         {
             _context = context;
         }
@@ -38,7 +38,6 @@ namespace ValeiLunchAPI.Lunches
 
         // POST api/<controller>/
         [HttpPost]
-        [Route("add")]
         public ActionResult Post([FromBody]Lunch lunch)
         {
             var restaurant = _context.Restaurants.FirstOrDefault(r => r.Name.ToLower() == lunch.Restaurant.Name.ToLower());

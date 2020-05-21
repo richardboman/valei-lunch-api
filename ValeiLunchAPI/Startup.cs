@@ -33,6 +33,14 @@ namespace ValeiLunchAPI
 
             services.AddDbContext<LunchDbContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddCors(o => o.AddPolicy("EnableCors_dev", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +49,7 @@ namespace ValeiLunchAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors("EnableCors_dev");
             }
 
             app.UseHttpsRedirection();
@@ -53,6 +62,7 @@ namespace ValeiLunchAPI
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
