@@ -24,13 +24,16 @@ namespace ValeiLunchAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            //Fixes problem with deserialization of Restaurant model when loading related
+            //data from Lunches
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
+            
+            //Configure DbContext dependency injection
             services.AddDbContext<LunchDbContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -43,12 +46,12 @@ namespace ValeiLunchAPI
             
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //CORS-fix
                 app.UseCors("EnableCors_dev");
             }
 

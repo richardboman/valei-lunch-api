@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ValeiLunchAPI.Data.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,6 +27,7 @@ namespace ValeiLunchAPI.Data.Migrations
                     LunchId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Rating = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     Comment = table.Column<string>(nullable: true),
                     RestaurantId = table.Column<int>(nullable: false)
                 },

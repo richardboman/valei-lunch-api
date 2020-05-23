@@ -11,9 +11,8 @@ namespace ValeiLunchAPI.Lunches.Models
     public class Lunch
     {
         public int LunchId { get; set; }
-        [JsonProperty("rating")]
         public int Rating { get; set; }
-        [JsonProperty("comment")]
+        public DateTime Date { get; set; }
         public string Comment { get; set; }
 
         public int RestaurantId { get; set; }
